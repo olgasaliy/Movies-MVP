@@ -1,0 +1,23 @@
+//
+//  SearchResultDataProvide.swift
+//  MoviesNew
+//
+//  Created by Olga Saliy on 8/16/18.
+//  Copyright © 2018 Olha Salii. All rights reserved.
+//
+
+import Foundation
+import Alamofire
+
+class SearchResultDataProvider: DataProvider {
+    
+    init() {
+        let sessionManager = SessionManager(configuration: URLSessionConfiguration.default)
+        super.init(sessionManager)
+    }
+    
+    func search(by query: String, completion: @escaping (_ response: SearchResult?, _ error: Error?) -> ()) {
+        execute(request: MoviesRouter.search(query: query), completion: completion)
+    }
+    
+}
