@@ -17,7 +17,7 @@ class SearchResultDataProvider: DataProvider {
     }
     
     func search(by query: String, completion: @escaping (_ response: SearchResult?, _ error: Error?) -> ()) {
-        execute(request: MoviesRouter.search(query: query), completion: completion)
+        execute(request: SearchResultRouter.search(query: query), completion: completion)
     }
     
 }

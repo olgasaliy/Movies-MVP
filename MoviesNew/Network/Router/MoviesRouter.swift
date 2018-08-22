@@ -11,16 +11,12 @@ import Alamofire
 
 enum MoviesRouter: ApiRouterProtocol {
     
-    case search(query: String)
-    
     case getDetails(id: Int)
     
     var path: String {
         switch self {
-        case .search(_):
-            return "/search/movie"
         case .getDetails(let id):
-            return "/movie/\(id)"
+            return "movie/\(id)"
         }
     }
     
@@ -28,12 +24,4 @@ enum MoviesRouter: ApiRouterProtocol {
         return .get
     }
     
-    var parameters: Parameters {
-        switch self {
-        case .search(let query):
-            return ["query" : query]
-        default:
-            return [:]
-        }
-    }
 }

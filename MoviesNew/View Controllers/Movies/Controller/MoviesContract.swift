@@ -10,8 +10,8 @@ import Foundation
 
 protocol MoviesView: class {
     
-    func setMovies(_ movies: [Movie])
-    func showError(_ error: String)
+    func display(movies: [MovieItem])
+    func show(error: String)
     
 }
 

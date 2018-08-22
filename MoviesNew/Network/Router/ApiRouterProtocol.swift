@@ -37,11 +37,7 @@ protocol ApiRouterProtocol: URLRequestConvertible {
 extension ApiRouterProtocol {
     
     var urlPath: URL {
-        return URL(fileURLWithPath: "https://api.themoviedb.org/3")
-    }
-    
-    private var apiKey: (String, String) {
-        return ("api_key", "f04e8ed93af390cef2ecddaf78379d66")
+        return URL(fileURLWithPath: Constants.Configuration.baseURL)
     }
     
     var body: String? {
@@ -50,12 +46,6 @@ extension ApiRouterProtocol {
     
     var parameters: Parameters {
         return [:]
-    }
-    
-    private var allParameters: Parameters{
-        var map = parameters
-        map[apiKey.0] = apiKey.1
-        return map
     }
     
     var headers: [String: String] {
@@ -79,13 +69,35 @@ extension ApiRouterProtocol {
         var urlRequest = try URLRequest(url: urlPath.appendingPathComponent(path),
                                         method: method,
                                         headers: allHeaders)
-        urlRequest = try URLEncoding.default.encode(urlRequest, with: allParameters)
+        urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        urlRequest.appendAPIKey()
         
         if let body = body?.data(using: String.Encoding.utf8) {
             urlRequest.httpBody = body
         }
         
         return urlRequest
+    }
+    
+}
+
+private extension URLRequest {
+    
+    mutating func appendAPIKey() {
+        guard let url = url else {
+            return
+        }
+        
+        let queryItem = URLQueryItem(name: Constants.Configuration.apiKey.name, value: Constants.Configuration.apiKey.value)
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        
+        if urlComponents?.queryItems?.isEmpty ?? true {
+            urlComponents?.queryItems = [queryItem]
+        } else {
+            urlComponents?.queryItems?.append(queryItem)
+        }
+        
+        self.url = urlComponents?.url
     }
     
 }
