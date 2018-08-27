@@ -123,14 +123,6 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		CC11B113212B0CC5009896E6 /* Movies */ = {
-			isa = PBXGroup;
-			children = (
-				CC19F931212EB88200421498 /* Controllers */,
-			);
-			path = Movies;
-			sourceTree = "<group>";
-		};
 		CC11B114212B0CD0009896E6 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,14 +130,6 @@
 				CC11B115212B0CE5009896E6 /* MovieCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		CC11B11C212D60B1009896E6 /* General */ = {
-			isa = PBXGroup;
-			children = (
-				CC11B11D212D60BC009896E6 /* Cell */,
-			);
-			path = General;
 			sourceTree = "<group>";
 		};
 		CC11B11D212D60BC009896E6 /* Cell */ = {
@@ -172,37 +156,6 @@
 				CC11B124212D62A4009896E6 /* MovieItem.swift */,
 			);
 			path = Items;
-			sourceTree = "<group>";
-		};
-		CC11B126212D63B8009896E6 /* MoviesController */ = {
-			isa = PBXGroup;
-			children = (
-				CC11B114212B0CD0009896E6 /* Cells */,
-				CCB0771F21258BD1005FF400 /* MoviesController.swift */,
-				CCB077442125AA25005FF400 /* MoviesContract.swift */,
-				CCB077462125AA38005FF400 /* MoviesPresenterImpl.swift */,
-			);
-			path = MoviesController;
-			sourceTree = "<group>";
-		};
-		CC19F931212EB88200421498 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				CC19F932212EB88A00421498 /* MovieDetailsController */,
-				CC11B126212D63B8009896E6 /* MoviesController */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		CC19F932212EB88A00421498 /* MovieDetailsController */ = {
-			isa = PBXGroup;
-			children = (
-				CC19F93B212EBB5900421498 /* Cells */,
-				CC19F935212EBB2E00421498 /* MovieDetailsController.swift */,
-				CC19F937212EBB3F00421498 /* MovieDetailsContract.swift */,
-				CC19F939212EBB5400421498 /* MovieDetailsPresenterImpl.swift */,
-			);
-			path = MovieDetailsController;
 			sourceTree = "<group>";
 		};
 		CC19F93B212EBB5900421498 /* Cells */ = {
@@ -247,9 +200,8 @@
 		CCB0771C21258BD0005FF400 /* MoviesNew */ = {
 			isa = PBXGroup;
 			children = (
-				CC11B110212B0680009896E6 /* Helpers */,
-				CCB077432125A67C005FF400 /* View Controllers */,
-				CCB0773021258BE7005FF400 /* Model */,
+				CCCE63D121343C10005757CB /* Presentation */,
+				CCCE63D021343BF7005757CB /* Common */,
 				CCB0772F21258BDE005FF400 /* Network */,
 				CCB0771D21258BD0005FF400 /* AppDelegate.swift */,
 				CCB0772121258BD1005FF400 /* Main.storyboard */,
@@ -263,6 +215,7 @@
 		CCB0772F21258BDE005FF400 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				CCB0773021258BE7005FF400 /* Model */,
 				CCB0773221258FB3005FF400 /* Router */,
 				CCB0773121258FAB005FF400 /* Provider */,
 			);
@@ -302,13 +255,44 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
-		CCB077432125A67C005FF400 /* View Controllers */ = {
+		CCCE63D021343BF7005757CB /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				CC11B11C212D60B1009896E6 /* General */,
-				CC11B113212B0CC5009896E6 /* Movies */,
+				CC11B11D212D60BC009896E6 /* Cell */,
+				CC11B110212B0680009896E6 /* Helpers */,
 			);
-			path = "View Controllers";
+			path = Common;
+			sourceTree = "<group>";
+		};
+		CCCE63D121343C10005757CB /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CCCE63D321343C32005757CB /* Movie Details */,
+				CCCE63D221343C23005757CB /* Movies Search */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		CCCE63D221343C23005757CB /* Movies Search */ = {
+			isa = PBXGroup;
+			children = (
+				CC11B114212B0CD0009896E6 /* Cells */,
+				CCB0771F21258BD1005FF400 /* MoviesController.swift */,
+				CCB077442125AA25005FF400 /* MoviesContract.swift */,
+				CCB077462125AA38005FF400 /* MoviesPresenterImpl.swift */,
+			);
+			path = "Movies Search";
+			sourceTree = "<group>";
+		};
+		CCCE63D321343C32005757CB /* Movie Details */ = {
+			isa = PBXGroup;
+			children = (
+				CC19F93B212EBB5900421498 /* Cells */,
+				CC19F935212EBB2E00421498 /* MovieDetailsController.swift */,
+				CC19F937212EBB3F00421498 /* MovieDetailsContract.swift */,
+				CC19F939212EBB5400421498 /* MovieDetailsPresenterImpl.swift */,
+			);
+			path = "Movie Details";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
