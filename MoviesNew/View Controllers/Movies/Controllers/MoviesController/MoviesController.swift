@@ -71,6 +71,7 @@ extension MoviesController: MoviesView {
 }
 
 extension MoviesController {
+    // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return  isSearching ? moviesArraySearch.count : moviesArray.count

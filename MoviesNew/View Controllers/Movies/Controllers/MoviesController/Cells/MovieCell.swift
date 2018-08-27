@@ -6,7 +6,6 @@
 //  Copyright © 2018 Olha Salii. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class MovieCell: UITableViewCell {

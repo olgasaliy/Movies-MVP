@@ -1,27 +1,27 @@
 //
-//  Movie.swift
+//  ProductionCompany.swift
 //  MoviesNew
 //
-//  Created by Olga Saliy on 8/16/18.
+//  Created by Olga Saliy on 8/23/18.
 //  Copyright © 2018 Olha Salii. All rights reserved.
 //
 
 import Foundation
 import ObjectMapper
 
-class Movie: Mappable {
+class ProductionCompany: Mappable {
     
     var id: Int?
-    var title: String?
-    var posterPath: String?
+    var name: String?
+    var originCountry: String?
     
     public required init?(map: Map) {
     }
     
     public func mapping(map: Map) {
         id <- map["id"]
-        title <- map["title"]
-        posterPath <- map["poster_path"]
+        name <- map["name"]
+        originCountry <- map["origin_country"]
     }
     
 }
