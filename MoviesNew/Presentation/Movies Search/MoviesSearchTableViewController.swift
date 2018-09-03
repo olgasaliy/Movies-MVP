@@ -8,25 +8,23 @@
 
 import UIKit
 
-class MoviesController: UITableViewController {
+class MoviesSearchTableViewController: UITableViewController {
 
-    @IBOutlet weak var tableHeaderView: UIView!
+    @IBOutlet private weak var tableHeaderView: UIView!
+    
     let searchController = UISearchController(searchResultsController: nil)
+    var presenter: MoviesPresenter?
     
     private let dataProvider = SearchResultDataProvider()
     private var moviesArray = [MovieItem]()
-    private var moviesArraySearch = [MovieItem]()
-    
-    private var isSearching = false
 
-    var presenter: MoviesPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initSearch()
+        hideProgress()
         
         presenter = MoviesPresenterImpl(self, dataProvider)
-        presenter?.search(by: "hello")
     }
     
     private func initSearch() {
@@ -39,19 +37,19 @@ class MoviesController: UITableViewController {
         searchController.searchBar.tintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)]
     }
-    
-    private func toggleHeaderView() {
-        if tableView.tableHeaderView == nil {
-            tableView.tableHeaderView = tableHeaderView
-        } else {
-            tableView.tableHeaderView = nil
-        }
-    }
 
 }
 
-extension MoviesController: MoviesView {
+extension MoviesSearchTableViewController: MoviesView {
    
+    func displayProgress() {
+        tableView.tableHeaderView = tableHeaderView
+    }
+    
+    func hideProgress() {
+        tableView.tableHeaderView = nil
+    }
+    
     func show(error: String) {
         let alertController = UIAlertController(title: "Error",
                                                 message: error,
@@ -64,54 +62,47 @@ extension MoviesController: MoviesView {
     
     func display(movies: [MovieItem]) {
         moviesArray = movies
-        toggleHeaderView()
         tableView.reloadData()
     }
 
 }
 
-extension MoviesController {
+extension MoviesSearchTableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  isSearching ? moviesArraySearch.count : moviesArray.count
+        return moviesArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item =  isSearching ? moviesArraySearch[indexPath.row] : moviesArray[indexPath.row]
+        let item = moviesArray[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: item.cellIdentifier, for: indexPath)
-        item.configure(cell: cell)
+        
+        if let cell = cell as? ConfigurableCell {
+            cell.configure(with: item)
+        }
+        
         return cell
     }
     
 }
 
-extension MoviesController: UISearchResultsUpdating {
+extension MoviesSearchTableViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
-        if let text = searchController.searchBar.text, !text.isEmpty {
-            isSearching = true
-            moviesArraySearch = moviesArray.filter { $0.title.contains(text) }
-            tableView.reloadData()
-        }
+        presenter?.search(by: searchController.searchBar.text)
     }
     
 }
 
-extension MoviesController: UISearchBarDelegate {
+extension MoviesSearchTableViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchController.searchBar.text, !text.isEmpty {
-            isSearching = false
-            moviesArray = []
-            presenter?.search(by: text)
-            tableView.reloadData()
-        }
+        presenter?.search(by: searchBar.text)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        isSearching = false
-        tableView.reloadData()
+        searchBar.resignFirstResponder()
     }
     
 }

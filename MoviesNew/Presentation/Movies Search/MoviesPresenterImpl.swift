@@ -18,7 +18,13 @@ class MoviesPresenterImpl: MoviesPresenter {
         self.dataProvider = dataProvider
     }
     
-    func search(by query: String) {
+    func search(by query: String?) {
+        guard let query = query, !query.isEmpty else {
+            view?.display(movies: [])
+            return
+        }
+        
+        view?.displayProgress()
         dataProvider.search(by: query, completion: moviesLoaded(_:_:))
     }
     
@@ -28,7 +34,8 @@ class MoviesPresenterImpl: MoviesPresenter {
             return
         }
         
-        let moviesItems = CellsGenerator.generateCells(from: movies)
+        view?.hideProgress()
+        let moviesItems = MoviesSearchConverter.covertCells(from: movies)
         view?.display(movies: moviesItems.sorted { $0.title < $1.title })
     }
     

@@ -14,17 +14,13 @@ class MovieItem: TableViewCellItem {
     let title: String
     let imageURL: String?
     
-    init(_ movie: Movie) {
-        self.title = movie.title ?? "Unknown"
-        self.imageURL = movie.posterPath
-    }
-    
     var cellIdentifier: String {
         return "movieCell"
     }
     
-    func configure(cell: UITableViewCell) {
-        (cell as! MovieCell).configure(with: self)
+    init(_ movie: Movie) {
+        self.title = movie.title ?? "Unknown"
+        self.imageURL = movie.posterPath
     }
     
 }

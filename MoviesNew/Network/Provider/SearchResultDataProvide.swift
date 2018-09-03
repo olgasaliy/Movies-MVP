@@ -11,11 +11,6 @@ import Alamofire
 
 class SearchResultDataProvider: DataProvider {
     
-    init() {
-        let sessionManager = SessionManager(configuration: URLSessionConfiguration.default)
-        super.init(sessionManager)
-    }
-    
     func search(by query: String, completion: @escaping (_ response: SearchResult?, _ error: Error?) -> ()) {
         execute(request: SearchResultRouter.search(query: query), completion: completion)
     }

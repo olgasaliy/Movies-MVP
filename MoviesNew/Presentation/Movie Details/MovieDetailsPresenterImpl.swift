@@ -23,6 +23,13 @@ class MovieDetailsPresenterImpl: MovieDetailsPresenter {
     }
     
     private func movieDetailsLoaded(_ movieDetail: MovieDetails?, _ error: Error?) {
+        guard let details = movieDetail, error == nil else {
+            view?.show(error: error?.localizedDescription ?? "Unknown error")
+            return
+        }
         
+        view?.hideProgress()
+        let sections = MovieDetailsConverter(details).convertSections()
+        view?.display(details: sections)
     }
 }

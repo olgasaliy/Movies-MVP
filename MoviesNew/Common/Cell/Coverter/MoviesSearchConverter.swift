@@ -8,9 +8,9 @@
 
 import Foundation
 
-class CellsGenerator {
+class MoviesSearchConverter {
     
-    static func generateCells(from movies:[Movie]) -> [MovieItem] {
+    static func covertCells(from movies: [Movie]) -> [MovieItem] {
         return movies.compactMap { MovieItem($0) }
     }
     

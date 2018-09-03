@@ -17,20 +17,16 @@ class GeneralDetailsItem: TableViewCellItem {
     let releaseDate: String?
     let originalLanguage: String?
     
+    var cellIdentifier: String {
+        return "generalDetailsCell"
+    }
+    
     init(_ movie: MovieDetails) {
         self.title = movie.title ?? "Unknown"
         self.imageURL = movie.posterPath
         self.rating = "\(movie.rating ?? 0.0)/10"
         self.releaseDate = movie.releaseDate
         self.originalLanguage = movie.spokenLanguages?.compactMap({ $0.name }).joined(separator: ", ")
-    }
-    
-    var cellIdentifier: String {
-        return "generalDetailsCell"
-    }
-    
-    func configure(cell: UITableViewCell) {
-        (cell as! GeneralDetailsCell).configure(with: self)
     }
     
 }

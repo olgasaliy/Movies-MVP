@@ -10,8 +10,10 @@ import Foundation
 
 protocol MovieDetailsView: class {
     
+    func displayProgress()
+    func hideProgress()
     func show(error: String)
-    func display(details: TableViewCellItem)
+    func display(details: [TableViewSectionItem])
     
 }
 

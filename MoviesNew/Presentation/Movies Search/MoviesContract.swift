@@ -10,6 +10,8 @@ import Foundation
 
 protocol MoviesView: class {
     
+    func displayProgress()
+    func hideProgress()
     func display(movies: [MovieItem])
     func show(error: String)
     
@@ -17,6 +19,6 @@ protocol MoviesView: class {
 
 protocol MoviesPresenter {
     
-    func search(by query: String)
+    func search(by query: String?)
     
 }

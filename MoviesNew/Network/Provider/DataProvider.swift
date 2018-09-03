@@ -15,6 +15,11 @@ class DataProvider {
     
     private let sessionManager: SessionManager
 
+    convenience init() {
+        let sessionManager = SessionManager(configuration: URLSessionConfiguration.default)
+        self.init(sessionManager)
+    }
+    
     init(_ sessionManager: SessionManager) {
         self.sessionManager = sessionManager
     }

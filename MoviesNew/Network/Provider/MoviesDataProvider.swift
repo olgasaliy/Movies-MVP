@@ -11,11 +11,6 @@ import Alamofire
 
 class MoviesDataProvider: DataProvider {
     
-    init() {
-        let sessionManager = SessionManager(configuration: URLSessionConfiguration.default)
-        super.init(sessionManager)
-    }
-    
     func getDetails(by id: Int, completion: @escaping (_ response: MovieDetails?, _ error: Error?) -> ()) {
         execute(request: MoviesRouter.getDetails(id: id), completion: completion)
     }

@@ -10,8 +10,8 @@ import UIKit
 
 class MovieCell: UITableViewCell {
     
-    @IBOutlet weak var imageLogo: UIImageView!
-    @IBOutlet weak var name: UILabel!
+    @IBOutlet private weak var imageLogo: UIImageView!
+    @IBOutlet private weak var name: UILabel!
     
 }
 

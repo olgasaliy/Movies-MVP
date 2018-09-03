@@ -10,23 +10,18 @@ import UIKit
 
 class CompanyDetailsCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    @IBOutlet private weak var name: UILabel!
+    
 }
 
 extension CompanyDetailsCell: ConfigurableCell {
     
     func configure(with item: TableViewCellItem) {
-        
+        guard let item = item as? CompanyDetailsItem else {
+            return
+        }
+        self.name.text = item.name
     }
     
 }

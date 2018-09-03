@@ -13,12 +13,12 @@ class OverviewDetailsItem: TableViewCellItem {
     
     let overview: String
     
-    init(_ movie: MovieDetails) {
-        self.overview = movie.overview ?? "No overview"
-    }
-    
     var cellIdentifier: String {
         return "overviewDetailsCell"
+    }
+    
+    init(_ movie: MovieDetails) {
+        self.overview = movie.overview ?? "No overview"
     }
     
     func configure(cell: UITableViewCell) {

@@ -7,11 +7,9 @@
 //
 
 import Foundation
-import UIKit
 
 protocol TableViewCellItem {
     
     var cellIdentifier: String { get }
-    func configure(cell: UITableViewCell)
     
 }
