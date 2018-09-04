@@ -10,7 +10,6 @@ import UIKit
 
 class CompanyDetailsCell: UITableViewCell {
 
-
     @IBOutlet private weak var name: UILabel!
     
 }

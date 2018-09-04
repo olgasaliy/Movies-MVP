@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 class OverviewDetailsItem: TableViewCellItem {
     
@@ -20,9 +19,5 @@ class OverviewDetailsItem: TableViewCellItem {
     init(_ movie: MovieDetails) {
         self.overview = movie.overview ?? "No overview"
     }
-    
-    func configure(cell: UITableViewCell) {
-        (cell as! OverviewDetailsCell).configure(with: self)
-    }
-    
+
 }

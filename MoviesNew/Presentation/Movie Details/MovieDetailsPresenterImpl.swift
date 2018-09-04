@@ -12,13 +12,31 @@ class MovieDetailsPresenterImpl: MovieDetailsPresenter {
     
     private weak var view: MovieDetailsView?
     private let dataProvider: MoviesDataProvider
+    private let repository: FavoriteRepository
+    private var movieDetails: MovieDetails?
     
-    init(_ view: MovieDetailsView?, _ dataProvider: MoviesDataProvider) {
+    init(_ view: MovieDetailsView?, _ dataProvider: MoviesDataProvider, _ repository: FavoriteRepository) {
         self.view = view
         self.dataProvider = dataProvider
+        self.repository = repository
     }
     
-    func getDetails(by id: Int) {
+    func likeIfNeeded() {
+        guard let movie = movieDetails else {
+            view?.show(error: "Movie hasn't been downloaded yet")
+            return
+        }
+        
+        if repository.contains(movie: movie) {
+            view?.likeMovie()
+        }
+    }
+
+    func getDetails(by id: Int?) {
+        guard let id = id else {
+            view?.show(error: "Urecognized movie")
+            return
+        }
         dataProvider.getDetails(by: id, completion: movieDetailsLoaded(_:_:))
     }
     
@@ -28,8 +46,41 @@ class MovieDetailsPresenterImpl: MovieDetailsPresenter {
             return
         }
         
+        self.movieDetails = details
+        
         view?.hideProgress()
         let sections = MovieDetailsConverter(details).convertSections()
         view?.display(details: sections)
     }
+}
+
+
+extension MovieDetailsPresenterImpl: GeneralDetailsCellDelegate {
+    
+    func didPressLikeButton() {
+        addMovieToFavorites()
+    }
+    
+    func didUnpressLikeButton() {
+        removeMovieFromFavorites()
+    }
+    
+    
+    private func addMovieToFavorites() {
+        guard let movie = movieDetails else {
+            view?.show(error: "Movie hasn't been downloaded yet")
+            return
+        }
+        repository.add(movie)
+    }
+    
+    private func removeMovieFromFavorites() {
+        guard let movie = movieDetails else {
+            view?.show(error: "Movie hasn't been downloaded yet")
+            return
+        }
+        repository.remove(movie)
+    }
+    
+    
 }

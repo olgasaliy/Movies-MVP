@@ -11,7 +11,7 @@ import ObjectMapper
 
 class Movie: Mappable {
     
-    var id: Int?
+    var id: Int!
     var title: String?
     var posterPath: String?
     

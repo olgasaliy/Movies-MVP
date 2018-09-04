@@ -8,10 +8,11 @@
 
 import Foundation
 import ObjectMapper
+import CoreData
 
 class MovieDetails: Mappable {
     
-    var id: Int?
+    var id: Int!
     var title: String?
     var releaseDate: String?
     var posterPath: String?
@@ -19,6 +20,8 @@ class MovieDetails: Mappable {
     var spokenLanguages: [SpokenLanguage]?
     var overview: String?
     var companies: [ProductionCompany]?
+    
+    init() { }
     
     public required init?(map: Map) {
     }
@@ -32,6 +35,53 @@ class MovieDetails: Mappable {
         spokenLanguages <- map["spoken_languages"]
         overview <- map["overview"]
         companies <- map["production_companies"]
+    }
+    
+}
+
+extension MovieDetails: ToManagedObjectMapping {
+
+    func asManagedObject(with context: NSManagedObjectContext) -> CDMovieDetails {
+        let managedObject: CDMovieDetails = context.insertObject()
+        
+        managedObject.id = Double(id)
+        managedObject.title = title
+        managedObject.releaseDate = releaseDate
+        managedObject.posterPath = posterPath
+        managedObject.rating = rating ?? 0.0
+        managedObject.overview = overview
+        
+        spokenLanguages?.forEach { managedObject.addToLanguages($0.asManagedObject(with: context)) }
+        companies?.forEach { managedObject.addToCompanies($0.asManagedObject(with: context)) }
+
+        return managedObject
+    }
+    
+}
+
+extension CDMovieDetails: FromManagedObjectMapping {
+    
+    func asMappable() -> MovieDetails {
+        let object = MovieDetails()
+        
+        object.id = Int(id)
+        object.title = title
+        object.releaseDate = releaseDate
+        object.posterPath = posterPath
+        object.rating = rating
+        object.overview = overview
+        
+        if let companies = companies as? Set<CDProductionCompany> {
+            object.companies = companies.compactMap { $0.asMappable() }
+
+        }
+        
+        if let languages = languages as? Set<CDSpokenLanguage> {
+            object.spokenLanguages = languages.compactMap { $0.asMappable() }
+            
+        }
+        
+        return object
     }
     
 }

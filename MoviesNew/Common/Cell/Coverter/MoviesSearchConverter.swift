@@ -10,8 +10,8 @@ import Foundation
 
 class MoviesSearchConverter {
     
-    static func covertCells(from movies: [Movie]) -> [MovieItem] {
-        return movies.compactMap { MovieItem($0) }
+    static func convertCells(from movies: [Movie]) -> [MovieItem] {
+        return movies.compactMap { MovieItem(movie: $0) }
     }
     
 }

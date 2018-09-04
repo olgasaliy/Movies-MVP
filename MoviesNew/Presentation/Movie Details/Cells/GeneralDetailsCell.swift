@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol GeneralDetailsCellDelegate: class {
+    
+    func didPressLikeButton()
+    func didUnpressLikeButton()
+}
+
 class GeneralDetailsCell: UITableViewCell {
     
     @IBOutlet private weak var posterImage: UIImageView!
@@ -15,7 +21,19 @@ class GeneralDetailsCell: UITableViewCell {
     @IBOutlet private weak var language: UILabel!
     @IBOutlet private weak var title: UILabel!
     @IBOutlet private weak var releaseDate: UILabel!
+    @IBOutlet private weak var likeButton: UIButton!
     
+    weak var delegate: GeneralDetailsCellDelegate?
+    
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        if likeButton.currentImage == #imageLiteral(resourceName: "liked") {
+            delegate?.didUnpressLikeButton()
+            likeButton.setImage(#imageLiteral(resourceName: "notliked"), for: .normal)
+        } else {
+            delegate?.didPressLikeButton()
+            likeButton.setImage(#imageLiteral(resourceName: "liked"), for: .normal)
+        }
+    }
 }
 
 extension GeneralDetailsCell: ConfigurableCell {
@@ -24,12 +42,20 @@ extension GeneralDetailsCell: ConfigurableCell {
         guard let item = item as? GeneralDetailsItem else {
             return
         }
-        // TODO: replace with actual image
+        // TODO: replace with an actual image
         self.posterImage.image = #imageLiteral(resourceName: "not-available")
         self.title.text = item.title
         self.rating.text = item.rating
         self.language.text = item.originalLanguage
         self.releaseDate.text = item.releaseDate
+    }
+    
+}
+
+extension GeneralDetailsCell: MovieDetailsTableViewControllerDelegate {
+    
+    func didLikeMovie() {
+        likeButton.setImage(#imageLiteral(resourceName: "liked"), for: .normal)
     }
     
 }

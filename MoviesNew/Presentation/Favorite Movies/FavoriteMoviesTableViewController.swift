@@ -1,30 +1,32 @@
 //
-//  ViewController.swift
+//  FavoriteMoviesTableViewController.swift
 //  MoviesNew
 //
-//  Created by Olga Saliy on 8/16/18.
+//  Created by Olga Saliy on 9/4/18.
 //  Copyright © 2018 Olha Salii. All rights reserved.
 //
 
 import UIKit
 
-class MoviesSearchTableViewController: UITableViewController {
-
-    @IBOutlet private weak var tableHeaderView: UIView!
-    
+class FavoriteMoviesTableViewController: UITableViewController {
+        
     let searchController = UISearchController(searchResultsController: nil)
-    var presenter: MoviesPresenter?
+    var presenter: FavoriteMoviesPresenter?
+    private let coreDataContainer = CoreDataConteiner.default
+    var favoriteRepository: FavoriteRepository!
     
-    private let dataProvider = SearchResultDataProvider()
     private var moviesArray = [MovieItem]()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initSearch()
-        hideProgress()
         
-        presenter = MoviesPresenterImpl(self, dataProvider)
+        favoriteRepository = FavoriteRepository(CoreDataConteiner.default)
+        presenter = FavoriteMoviesPresenetImpl(self, favoriteRepository)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        presenter?.fetchAll()
     }
     
     private func initSearch() {
@@ -46,18 +48,10 @@ class MoviesSearchTableViewController: UITableViewController {
             }
         }
     }
-
+    
 }
 
-extension MoviesSearchTableViewController: MoviesView {
-   
-    func displayProgress() {
-        tableView.tableHeaderView = tableHeaderView
-    }
-    
-    func hideProgress() {
-        tableView.tableHeaderView = nil
-    }
+extension FavoriteMoviesTableViewController: FavoriteMoviesView {
     
     func show(error: String) {
         let alertController = UIAlertController(title: "Error",
@@ -73,10 +67,10 @@ extension MoviesSearchTableViewController: MoviesView {
         moviesArray = movies
         tableView.reloadData()
     }
-
+    
 }
 
-extension MoviesSearchTableViewController {
+extension FavoriteMoviesTableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,7 +79,7 @@ extension MoviesSearchTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = moviesArray[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: item.cellIdentifier, for: indexPath)
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: item.cellIdentifier, for: indexPath)
         
         if let cell = cell as? ConfigurableCell {
             cell.configure(with: item)
@@ -96,15 +90,15 @@ extension MoviesSearchTableViewController {
     
 }
 
-extension MoviesSearchTableViewController: UISearchResultsUpdating {
-
+extension FavoriteMoviesTableViewController: UISearchResultsUpdating {
+    
     func updateSearchResults(for searchController: UISearchController) {
         presenter?.search(by: searchController.searchBar.text)
     }
     
 }
 
-extension MoviesSearchTableViewController: UISearchBarDelegate {
+extension FavoriteMoviesTableViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         presenter?.search(by: searchBar.text)
@@ -112,6 +106,7 @@ extension MoviesSearchTableViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        presenter?.fetchAll()
     }
     
 }

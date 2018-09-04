@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import UIKit
 
 class MovieItem: TableViewCellItem {
     
+    let id: Int
     let title: String
     let imageURL: String?
     
@@ -18,9 +18,16 @@ class MovieItem: TableViewCellItem {
         return "movieCell"
     }
     
-    init(_ movie: Movie) {
+    init(movie: Movie) {
+        self.id = movie.id
         self.title = movie.title ?? "Unknown"
         self.imageURL = movie.posterPath
+    }
+    
+    init(movieDetails: MovieDetails) {
+        self.id = movieDetails.id
+        self.title = movieDetails.title ?? "Unknown"
+        self.imageURL = movieDetails.posterPath
     }
     
 }

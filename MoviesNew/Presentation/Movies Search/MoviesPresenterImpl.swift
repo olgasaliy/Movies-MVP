@@ -35,7 +35,7 @@ class MoviesPresenterImpl: MoviesPresenter {
         }
         
         view?.hideProgress()
-        let moviesItems = MoviesSearchConverter.covertCells(from: movies)
+        let moviesItems = MoviesSearchConverter.convertCells(from: movies)
         view?.display(movies: moviesItems.sorted { $0.title < $1.title })
     }
     
