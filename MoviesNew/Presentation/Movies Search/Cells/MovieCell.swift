@@ -21,9 +21,16 @@ extension MovieCell: ConfigurableCell {
         guard let item = item as? MovieItem else {
             return
         }
-        // TODO: replace with actual image
-        self.imageLogo.image = #imageLiteral(resourceName: "not-available")
+        setImage(by: item.imageURL)
         self.name.text = item.title
+    }
+    
+    private func setImage(by url: String?) {
+        guard let imageUrl = url else {
+            self.imageLogo.image = #imageLiteral(resourceName: "not-available")
+            return
+        }
+        self.imageLogo.load(from: imageUrl)
     }
     
 }

@@ -33,21 +33,21 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="114" id="0jJ-u5-J3w" customClass="MovieCell" customModule="MoviesNew" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="114"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="144" id="0jJ-u5-J3w" customClass="MovieCell" customModule="MoviesNew" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0jJ-u5-J3w" id="c5r-Tu-laO">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="113.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="143.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GBT-T3-sUG">
-                                            <rect key="frame" x="16" y="16" width="65.5" height="82"/>
+                                            <rect key="frame" x="16" y="16" width="74.5" height="112"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="GBT-T3-sUG" secondAttribute="height" multiplier="4:5" id="NSX-7h-U1J"/>
+                                                <constraint firstAttribute="width" secondItem="GBT-T3-sUG" secondAttribute="height" multiplier="2:3" id="NSX-7h-U1J"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0Z-nL-IKf">
-                                            <rect key="frame" x="91.5" y="46" width="267.5" height="21"/>
+                                            <rect key="frame" x="100.5" y="61.5" width="258.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -90,21 +90,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="114" id="BhA-Qs-Et0" customClass="MovieCell" customModule="MoviesNew" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="114"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="144" id="BhA-Qs-Et0" customClass="MovieCell" customModule="MoviesNew" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BhA-Qs-Et0" id="zH5-Zj-JGC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="113.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="143.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8gP-4W-wJ5">
-                                            <rect key="frame" x="16" y="16" width="65.5" height="82"/>
+                                            <rect key="frame" x="16" y="16" width="74.5" height="112"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="8gP-4W-wJ5" secondAttribute="height" multiplier="4:5" id="Pu4-3f-C8a"/>
+                                                <constraint firstAttribute="width" secondItem="8gP-4W-wJ5" secondAttribute="height" multiplier="2:3" id="Pu4-3f-C8a"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4WC-q6-vYt">
-                                            <rect key="frame" x="91.5" y="46" width="267.5" height="21"/>
+                                            <rect key="frame" x="100.5" y="61.5" width="258.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -320,7 +320,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="NMt-Sr-OYc">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="J9s-Wo-RFU" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="initialController" automaticallyAdjustsScrollViewInsets="NO" id="J9s-Wo-RFU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="NXo-PL-4Q7"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tBh-aZ-LjT">
@@ -398,6 +398,6 @@
         <image name="notliked" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="40i-FK-EaH"/>
+        <segue reference="BV6-4f-eQH"/>
     </inferredMetricsTieBreakers>
 </document>

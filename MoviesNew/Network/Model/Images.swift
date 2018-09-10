@@ -1,17 +1,17 @@
 //
-//  Configuration.swift
+//  Images.swift
 //  MoviesNew
 //
-//  Created by Olga Saliy on 8/16/18.
+//  Created by Olga Saliy on 9/4/18.
 //  Copyright © 2018 Olha Salii. All rights reserved.
 //
 
 import Foundation
 import ObjectMapper
 
-class Configuration: Mappable {
+class Images: Mappable {
     
-    var images: Images!
+    var secure_base_url: String!
     
     init() { }
     
@@ -19,7 +19,7 @@ class Configuration: Mappable {
     }
     
     func mapping(map: Map) {
-        images <- map["images"]
+        secure_base_url <- map["secure_base_url"]
     }
     
 }

@@ -57,7 +57,6 @@ extension MovieDetailsTableViewController {
         if let cell = cell as? (GeneralDetailsCell & MovieDetailsTableViewControllerDelegate) {
             cell.delegate = presenter
             delegate = cell
-            
         }
         
         presenter?.likeIfNeeded()

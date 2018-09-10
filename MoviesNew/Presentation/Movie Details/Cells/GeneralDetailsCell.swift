@@ -42,14 +42,21 @@ extension GeneralDetailsCell: ConfigurableCell {
         guard let item = item as? GeneralDetailsItem else {
             return
         }
-        // TODO: replace with an actual image
-        self.posterImage.image = #imageLiteral(resourceName: "not-available")
+        
         self.title.text = item.title
         self.rating.text = item.rating
         self.language.text = item.originalLanguage
         self.releaseDate.text = item.releaseDate
+        setImage(by: item.imageURL)
     }
     
+    private func setImage(by url: String?) {
+        guard let imageUrl = url else {
+            self.posterImage.image = #imageLiteral(resourceName: "not-available")
+            return
+        }
+        self.posterImage.load(from: imageUrl)
+    }
 }
 
 extension GeneralDetailsCell: MovieDetailsTableViewControllerDelegate {

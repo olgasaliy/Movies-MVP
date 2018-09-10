@@ -6,6 +6,7 @@ target 'MoviesNew' do
     pod 'AlamofireObjectMapper', '~> 5.0'
     pod 'AlamofireImage'
     pod 'SwiftyJSON'
+    pod 'Kingfisher', '~> 4.0'
     use_frameworks!
 
   # Pods for MoviesNew

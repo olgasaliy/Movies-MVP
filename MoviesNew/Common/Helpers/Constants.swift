@@ -14,3 +14,10 @@ struct Constants {
         static let apiKey = (name: "api_key", value: "f04e8ed93af390cef2ecddaf78379d66")
     }
 }
+
+enum PosterSizes: String {
+    case original = "original"
+    case big = "w500"
+    case medium = "w185"
+    case small = "w92"
+}
