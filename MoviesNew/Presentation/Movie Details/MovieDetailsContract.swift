@@ -14,13 +14,11 @@ protocol MovieDetailsView: class {
     func hideProgress()
     func show(error: String)
     func display(details: [TableViewSectionItem])
-    func likeMovie()
     
 }
 
 protocol MovieDetailsPresenter {
     
     func getDetails(by id: Int?)
-    func likeIfNeeded()
     
 }

@@ -20,12 +20,14 @@ class GeneralDetailsItem: TableViewCellItem {
         return "generalDetailsCell"
     }
     
+    var isLiked: Bool = false
+    
     init(_ movie: MovieDetails) {
-        self.title = movie.title ?? "Unknown"
-        self.imageURL = movie.posterPath
-        self.rating = "\(movie.rating ?? 0.0)/10"
-        self.releaseDate = movie.releaseDate
-        self.originalLanguage = movie.spokenLanguages?.compactMap({ $0.name }).joined(separator: ", ")
+        title = movie.title ?? "Unknown"
+        imageURL = movie.posterPath
+        rating = "\(movie.rating ?? 0.0)/10"
+        releaseDate = movie.releaseDate
+        originalLanguage = movie.spokenLanguages?.compactMap({ $0.name }).joined(separator: ", ")
     }
     
 }

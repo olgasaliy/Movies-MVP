@@ -17,11 +17,12 @@ class RedirectionViewController: UIViewController {
         
         dataProvider.getConfiguration { [weak self] (configuration, error) in
             LocalDataStorage.default.imageUrl = configuration?.images.secure_base_url
-            self?.perform(#selector(RedirectionViewController.redirectToMainStoryboard), with: nil, afterDelay: 2.0)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                self?.redirectToMainStoryboard()
+            })
         }
     }
     
-    @objc
     private func redirectToMainStoryboard() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "initialController") as UIViewController

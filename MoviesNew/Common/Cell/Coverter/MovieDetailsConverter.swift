@@ -11,9 +11,11 @@ import Foundation
 class MovieDetailsConverter {
     
     private let details: MovieDetails
-    
-    init(_ details: MovieDetails) {
+    private let repository: FavoriteRepository
+
+    init(_ details: MovieDetails, _ repository: FavoriteRepository) {
         self.details = details
+        self.repository = repository
     }
     
     func convertSections() -> [TableViewSectionItem] {
@@ -27,7 +29,9 @@ class MovieDetailsConverter {
     }
     
     private func convertGeneralSection() -> TableViewSectionItem  {
-        let section = TableViewSectionItem(name: "General", items: [GeneralDetailsItem(details)])
+        let item = GeneralDetailsItem(details)
+        item.isLiked = repository.contains(movie: details)
+        let section = TableViewSectionItem(name: "General", items: [item])
         return section
     }
     
@@ -40,7 +44,9 @@ class MovieDetailsConverter {
         guard let companies = details.companies else {
             return nil
         }
-        let section = TableViewSectionItem(name: "Production Companies", items: companies.compactMap { CompanyDetailsItem($0) })
+        
+        let unsortedCompanies = companies.compactMap { CompanyDetailsItem($0) }
+        let section = TableViewSectionItem(name: "Production Companies", items: unsortedCompanies.sorted(by: { $0.name < $1.name }))
         return section
     }
     

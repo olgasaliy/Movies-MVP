@@ -21,23 +21,17 @@ class MovieDetailsPresenterImpl: MovieDetailsPresenter {
         self.repository = repository
     }
     
-    func likeIfNeeded() {
-        guard let movie = movieDetails else {
-            view?.show(error: "Movie hasn't been downloaded yet")
-            return
-        }
-        
-        if repository.contains(movie: movie) {
-            view?.likeMovie()
-        }
-    }
-
     func getDetails(by id: Int?) {
         guard let id = id else {
             view?.show(error: "Urecognized movie")
             return
         }
-        dataProvider.getDetails(by: id, completion: movieDetailsLoaded(_:_:))
+        
+        if let movie = repository.fetch(by: id) {
+            movieDetailsLoaded(movie, nil)
+        } else {
+            dataProvider.getDetails(by: id, completion: movieDetailsLoaded(_:_:))
+        }   
     }
     
     private func movieDetailsLoaded(_ movieDetail: MovieDetails?, _ error: Error?) {
@@ -49,7 +43,7 @@ class MovieDetailsPresenterImpl: MovieDetailsPresenter {
         self.movieDetails = details
         
         view?.hideProgress()
-        let sections = MovieDetailsConverter(details).convertSections()
+        let sections = MovieDetailsConverter(details, repository).convertSections()
         view?.display(details: sections)
     }
 }

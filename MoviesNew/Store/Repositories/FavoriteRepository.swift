@@ -31,31 +31,24 @@ class FavoriteRepository {
     }
     
     func fetch(by name: String) -> [MovieDetails] {
+        return fetch(by: "title contains[c] \(name)", with: container.viewContext).compactMap { $0.asMappable() }
+    }
+    
+    private func fetchManagedObject(by id: Int) -> CDMovieDetails? {
+        return fetch(by: "id == \(Double(id))", with: container.viewContext).first
+    }
+    
+    private func fetch(by predicate: String, with context: NSManagedObjectContext) -> [CDMovieDetails] {
         do {
             let fetchRequest: NSFetchRequest = CDMovieDetails.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "title contains[c] %@", name)
+            fetchRequest.predicate = NSPredicate(format: predicate)
             let fetchedResults = try container.viewContext.fetch(fetchRequest)
-            return fetchedResults.compactMap { $0.asMappable() }
+            return fetchedResults
         } catch {
             print(error.localizedDescription)
         }
         
         return []
-    }
-    
-    private func fetchManagedObject(by id: Int) -> CDMovieDetails? {
-        do {
-            let fetchRequest: NSFetchRequest = CDMovieDetails.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "id == %f", Double(id))
-            let fetchedResults = try container.viewContext.fetch(fetchRequest)
-            if let movie = fetchedResults.first {
-                return movie
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        return nil
     }
     
     func fetch(by id: Int) -> MovieDetails? {
@@ -75,11 +68,14 @@ class FavoriteRepository {
     }
     
     func remove(_ movie: MovieDetails) {
-        guard let managedObject = fetchManagedObject(by: movie.id) else {
-            return
+        let context = container.writeContext
+        context.perform { [weak self] in
+            guard let managedObject = self?.fetch(by: "id == \(Double(movie.id))", with: context).first else {
+                return
+            }
+            self?.container.viewContext.delete(managedObject)
+            self?.container.viewContext.saveOrRollback()
         }
-        container.viewContext.delete(managedObject)
-        container.viewContext.saveOrRollback()
     }
     
     

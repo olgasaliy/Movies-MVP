@@ -14,7 +14,14 @@ class LocalDataStorage {
         return LocalDataStorage()
     }()
     
-    var imageUrl: String?
+    var imageUrl: String? {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "imageUrl")
+        }
+        get {
+            return UserDefaults.standard.string(forKey: "imageUrl")
+        }
+    }
     
     private init() {}
     

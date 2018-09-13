@@ -71,15 +71,9 @@ extension CDMovieDetails: FromManagedObjectMapping {
         object.rating = rating
         object.overview = overview
         
-        if let companies = companies as? Set<CDProductionCompany> {
-            object.companies = companies.compactMap { $0.asMappable() }
-
-        }
-        
-        if let languages = languages as? Set<CDSpokenLanguage> {
-            object.spokenLanguages = languages.compactMap { $0.asMappable() }
-            
-        }
+        object.companies = companies?.allObjects as? [ProductionCompany]
+        object.companies = (companies?.allObjects as? [CDProductionCompany])?.compactMap { $0.asMappable() }
+        object.spokenLanguages = (languages?.allObjects as? [CDSpokenLanguage])?.compactMap { $0.asMappable() }
         
         return object
     }

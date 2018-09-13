@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol MovieDetailsTableViewControllerDelegate: class {
-    func didLikeMovie()
-}
-
 class MovieDetailsTableViewController: UITableViewController {
 
     @IBOutlet private weak var headerView: UIView!
@@ -19,7 +15,6 @@ class MovieDetailsTableViewController: UITableViewController {
     private let dataProvider = MoviesDataProvider()
     private let coreDataContainer = CoreDataConteiner.default
     private var sections = [TableViewSectionItem]()
-    weak var delegate: MovieDetailsTableViewControllerDelegate?
     
     var favoriteRepository: FavoriteRepository!
     var presenter: (MovieDetailsPresenter & GeneralDetailsCellDelegate)?
@@ -33,6 +28,13 @@ class MovieDetailsTableViewController: UITableViewController {
         
         presenter?.getDetails(by: movieId)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if  sections.count > 0 {
+            presenter?.getDetails(by: movieId)
+        }
+    }
+    
 }
 
 extension MovieDetailsTableViewController {
@@ -54,12 +56,9 @@ extension MovieDetailsTableViewController {
             cell.configure(with: item)
         }
         
-        if let cell = cell as? (GeneralDetailsCell & MovieDetailsTableViewControllerDelegate) {
+        if let cell = cell as? GeneralDetailsCell {
             cell.delegate = presenter
-            delegate = cell
         }
-        
-        presenter?.likeIfNeeded()
         
         return cell
     }
@@ -71,10 +70,6 @@ extension MovieDetailsTableViewController {
 }
 
 extension MovieDetailsTableViewController: MovieDetailsView {
-    
-    func likeMovie() {
-        delegate?.didLikeMovie()
-    }
     
     func displayProgress() {
         tableView.tableHeaderView = headerView

@@ -20,8 +20,15 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bpe-Eb-xbl">
                                 <rect key="frame" x="137" y="283" width="100" height="100"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Kea-WG-VA2">
+                                        <rect key="frame" x="40" y="40" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="Kea-WG-VA2" firstAttribute="centerY" secondItem="Bpe-Eb-xbl" secondAttribute="centerY" id="6OZ-0u-JIW"/>
+                                    <constraint firstItem="Kea-WG-VA2" firstAttribute="centerX" secondItem="Bpe-Eb-xbl" secondAttribute="centerX" id="Yms-Jg-HTT"/>
                                     <constraint firstAttribute="width" constant="100" id="deL-vw-uXy"/>
                                     <constraint firstAttribute="height" constant="100" id="kF0-tY-NI4"/>
                                 </constraints>
@@ -32,10 +39,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Kea-WG-VA2">
-                                <rect key="frame" x="177" y="323" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

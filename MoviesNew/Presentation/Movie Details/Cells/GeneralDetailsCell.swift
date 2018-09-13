@@ -25,15 +25,24 @@ class GeneralDetailsCell: UITableViewCell {
     
     weak var delegate: GeneralDetailsCellDelegate?
     
+    private var item: GeneralDetailsItem?
+    
     @IBAction func likeButtonPressed(_ sender: Any) {
-        if likeButton.currentImage == #imageLiteral(resourceName: "liked") {
+        guard var isLiked = item?.isLiked else {
+            return
+        }
+        
+        if isLiked {
             delegate?.didUnpressLikeButton()
+            isLiked = false
             likeButton.setImage(#imageLiteral(resourceName: "notliked"), for: .normal)
         } else {
             delegate?.didPressLikeButton()
+            isLiked = true
             likeButton.setImage(#imageLiteral(resourceName: "liked"), for: .normal)
         }
     }
+
 }
 
 extension GeneralDetailsCell: ConfigurableCell {
@@ -43,11 +52,14 @@ extension GeneralDetailsCell: ConfigurableCell {
             return
         }
         
-        self.title.text = item.title
-        self.rating.text = item.rating
-        self.language.text = item.originalLanguage
-        self.releaseDate.text = item.releaseDate
+        self.item = item
+        
+        title.text = item.title
+        rating.text = item.rating
+        language.text = item.originalLanguage
+        releaseDate.text = item.releaseDate
         setImage(by: item.imageURL)
+        setDefaultLike()
     }
     
     private func setImage(by url: String?) {
@@ -57,12 +69,12 @@ extension GeneralDetailsCell: ConfigurableCell {
         }
         self.posterImage.load(from: imageUrl)
     }
+    
+    private func setDefaultLike() {
+        guard let isLiked = item?.isLiked else {
+            return
+        }
+        likeButton.setImage(isLiked ? #imageLiteral(resourceName: "liked") : #imageLiteral(resourceName: "notliked") , for: .normal)
+    }
 }
 
-extension GeneralDetailsCell: MovieDetailsTableViewControllerDelegate {
-    
-    func didLikeMovie() {
-        likeButton.setImage(#imageLiteral(resourceName: "liked"), for: .normal)
-    }
-    
-}
