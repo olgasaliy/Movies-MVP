@@ -12,8 +12,6 @@ class FavoriteMoviesTableViewController: UITableViewController {
         
     let searchController = UISearchController(searchResultsController: nil)
     var presenter: FavoriteMoviesPresenter?
-    private let coreDataContainer = CoreDataConteiner.default
-    var favoriteRepository: FavoriteRepository!
     
     private var moviesArray = [MovieItem]()
     
@@ -21,8 +19,7 @@ class FavoriteMoviesTableViewController: UITableViewController {
         super.viewDidLoad()
         initSearch()
         
-        favoriteRepository = FavoriteRepository(CoreDataConteiner.default)
-        presenter = FavoriteMoviesPresenetImpl(self, favoriteRepository)
+        presenter = FavoriteMoviesPresenetImpl(self, FavoriteRepository(CoreDataConteiner.default))
     }
     
     override func viewDidAppear(_ animated: Bool) {

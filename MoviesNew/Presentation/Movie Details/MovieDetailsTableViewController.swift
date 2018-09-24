@@ -13,7 +13,6 @@ class MovieDetailsTableViewController: UITableViewController {
     @IBOutlet private weak var headerView: UIView!
     
     private let dataProvider = MoviesDataProvider()
-    private let coreDataContainer = CoreDataConteiner.default
     private var sections = [TableViewSectionItem]()
     
     var favoriteRepository: FavoriteRepository!

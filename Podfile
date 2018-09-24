@@ -3,7 +3,7 @@
 
 target 'MoviesNew' do
     pod 'Alamofire', '~> 4.7'
-    pod 'AlamofireObjectMapper', '~> 5.0'
+    pod 'AlamofireObjectMapper'
     pod 'AlamofireImage'
     pod 'SwiftyJSON'
     pod 'Kingfisher', '~> 4.0'
