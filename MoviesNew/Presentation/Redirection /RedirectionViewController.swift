@@ -10,23 +10,23 @@ import UIKit
 
 class RedirectionViewController: UIViewController {
 
-    private let dataProvider = ConfigurationDataProvider()
-    
+    var presenter: RedirectionPresenter?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataProvider.getConfiguration { [weak self] (configuration, error) in
-            LocalDataStorage.default.imageUrl = configuration?.images.secure_base_url
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-                self?.redirectToMainStoryboard()
-            })
-        }
-    }
-    
-    private func redirectToMainStoryboard() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "initialController") as UIViewController
-        present(vc, animated: true, completion: nil)
+        presenter = RedirectionPresenterImpl(self, ConfigurationDataProvider())
+        presenter?.loadConfigurations()
     }
 
+}
+
+extension RedirectionViewController: RedirectionView {
+    
+    func redirect(to controller: String, in storyboard: String) {
+        let storyboard = UIStoryboard(name: storyboard, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: controller) as UIViewController
+        present(vc, animated: true, completion: nil)
+    }
+    
 }

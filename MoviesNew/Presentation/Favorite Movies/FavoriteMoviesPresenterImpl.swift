@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FavoriteMoviesPresenetImpl: FavoriteMoviesPresenter {
+class FavoriteMoviesPresenterImpl: FavoriteMoviesPresenter {
     
     private weak var view: FavoriteMoviesView?
     private let repository: FavoriteRepository

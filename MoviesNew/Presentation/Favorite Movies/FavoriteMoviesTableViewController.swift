@@ -19,7 +19,7 @@ class FavoriteMoviesTableViewController: UITableViewController {
         super.viewDidLoad()
         initSearch()
         
-        presenter = FavoriteMoviesPresenetImpl(self, FavoriteRepository(CoreDataConteiner.default))
+        presenter = FavoriteMoviesPresenterImpl(self, FavoriteRepository(CoreDataConteiner.default))
     }
     
     override func viewDidAppear(_ animated: Bool) {
