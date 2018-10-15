@@ -13,8 +13,6 @@ class Configuration: Mappable {
     
     var images: Images!
     
-    init() { }
-    
     required init?(map: Map) {
     }
     

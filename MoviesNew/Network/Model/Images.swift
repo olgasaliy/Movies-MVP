@@ -13,8 +13,6 @@ class Images: Mappable {
     
     var secure_base_url: String!
     
-    init() { }
-    
     required init?(map: Map) {
     }
     

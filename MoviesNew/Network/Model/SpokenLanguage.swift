@@ -12,7 +12,7 @@ import CoreData
 
 class SpokenLanguage: Mappable {
     
-    var iso: Int?
+    var iso: String?
     var name: String?
     
     init() { }
@@ -32,7 +32,7 @@ extension SpokenLanguage: ToManagedObjectMapping {
     func asManagedObject(with context: NSManagedObjectContext) -> CDSpokenLanguage {
         let managedObject: CDSpokenLanguage = context.insertObject()
         
-        managedObject.iso = Double(iso ?? 0)
+        managedObject.iso = iso
         managedObject.name = name
         
         return managedObject
@@ -45,7 +45,7 @@ extension CDSpokenLanguage: FromManagedObjectMapping {
     func asMappable() -> SpokenLanguage {
         let object = SpokenLanguage()
         
-        object.iso = Int(iso)
+        object.iso = iso
         object.name = name
         
         return object

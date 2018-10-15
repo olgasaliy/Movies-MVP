@@ -143,20 +143,20 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-iOS11.4/Alamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage-iOS11.4/AlamofireImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper-iOS11.4/AlamofireObjectMapper.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher-iOS11.4/Kingfisher.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper-iOS11.4/ObjectMapper.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS11.4/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-iOS11.4/Alamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage-iOS11.4/AlamofireImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper-iOS11.4/AlamofireObjectMapper.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher-iOS11.4/Kingfisher.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper-iOS11.4/ObjectMapper.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS11.4/SwiftyJSON.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
