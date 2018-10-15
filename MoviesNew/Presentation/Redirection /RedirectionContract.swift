@@ -11,6 +11,7 @@ import Foundation
 protocol RedirectionView: class {
     
     func redirect(to controller: String, in storyboard: String)
+    func show(error: String)
     
 }
 

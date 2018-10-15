@@ -24,13 +24,13 @@ class FavoriteMoviesPresenterImpl: FavoriteMoviesPresenter {
         }
         
         let moviesDetails = repository.fetch(by: query)
-        let movieItems = FavoritesMoviesConverter.covertCells(from: moviesDetails)
+        let movieItems = FavoritesMoviesConverter.convertCells(from: moviesDetails)
         view?.display(movies: movieItems)
     }
     
     func fetchAll() {
         let moviesDetails = repository.fetchAll()
-        let movieItems = FavoritesMoviesConverter.covertCells(from: moviesDetails)
+        let movieItems = FavoritesMoviesConverter.convertCells(from: moviesDetails)
         view?.display(movies: movieItems)
     }
     

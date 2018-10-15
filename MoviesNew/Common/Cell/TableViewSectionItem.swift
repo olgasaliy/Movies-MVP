@@ -13,7 +13,7 @@ class TableViewSectionItem {
     let name: String
     let items: [TableViewCellItem]
     
-    init(name:String, items: [TableViewCellItem]) {
+    init(name: String, items: [TableViewCellItem]) {
         self.name = name
         self.items = items
     }

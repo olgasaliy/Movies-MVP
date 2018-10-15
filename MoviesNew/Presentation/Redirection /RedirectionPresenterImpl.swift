@@ -20,10 +20,14 @@ class RedirectionPresenterImpl: RedirectionPresenter {
     
     func loadConfigurations() {
         dataProvider.getConfiguration { [weak self] (configuration, error) in
-            LocalDataStorage.default.imageUrl = configuration?.images.secure_base_url
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-                self?.view?.redirect(to: "initialController", in: "Main")
-            })
+            guard let configuration = configuration, error == nil else {
+                self?.view?.show(error: error?.localizedDescription ?? "Unknown error")
+                return
+            }
+            
+            LocalDataStorage.default.imageUrl = configuration.images.secure_base_url
+            self?.view?.redirect(to: "initialController", in: "Main")
+            
         }
     }
     

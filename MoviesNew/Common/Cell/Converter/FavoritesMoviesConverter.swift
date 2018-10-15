@@ -10,7 +10,7 @@ import Foundation
 
 class FavoritesMoviesConverter {
     
-    static func covertCells(from moviesDetails: [MovieDetails]) -> [MovieItem] {
+    static func convertCells(from moviesDetails: [MovieDetails]) -> [MovieItem] {
         return moviesDetails.compactMap { MovieItem(movieDetails: $0) }
     }
     

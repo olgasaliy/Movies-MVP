@@ -23,6 +23,15 @@ class RedirectionViewController: UIViewController {
 
 extension RedirectionViewController: RedirectionView {
     
+    func show(error: String) {
+        let alertController = UIAlertController(title: "Error",
+                                                message: error,
+                                                preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "OK",
+                                                style: UIAlertActionStyle.default,handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func redirect(to controller: String, in storyboard: String) {
         let storyboard = UIStoryboard(name: storyboard, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: controller) as UIViewController
